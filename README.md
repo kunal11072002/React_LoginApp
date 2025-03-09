@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+﻿# MERN_Auth
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a boilerplate template for MERN (MongoDB, Express, React, Node.js) stack applications with JWT authentication. It provides a solid foundation for building secure web applications with user authentication functionality.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- User registration and login
+- JWT (JSON Web Token) based authentication
+- Secure password hashing using bcrypt
+- Input validation using validator.js
+  
+- MongoDB for data storage
+- Express.js backend API & Node.js server environment
 
-### `npm start`
+- Protected routes in React
+- React frontend with React Router for navigation
+- React Context and Hooks for auth state management
+- Tailwind CSS for styling
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Before you begin, ensure you have the following installed:
+- Node.js 
+- npm
+- MongoDB 
 
-### `npm test`
+## Setup Instructions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository:
+   ```
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
+   ```
 
-### `npm run build`
+2. Install dependencies for the server:
+   ```
+   cd server
+   npm install
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Install dependencies for the client:
+   ```
+   cd ../client
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Create a `.env` file in the server directory and add your MongoDB connection string(set up your mongoDB cluster before) and JWT secret(any secret string will suffice):
+   ```
+   PORT=some_sample_port_number
+   MONGODB_URI=your_mongodb_connection_string
+   SECRET=your_jwt_secret
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. Start the server:
+   ```
+   cd ../server
+   npm start
+   ```
 
-### `npm run eject`
+6. In a new terminal, start the client:
+   ```
+   cd ../client
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+7. Open your browser and navigate to `http://localhost:3000` to see the application running.(It generally opens automatically)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Key Components
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Client-side
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `AuthContext.js`: Creates the authentication context and provides the auth state to the app.
+- `UseAuthContext.js`: Custom hook to use the AuthContext.
+- `UseLogin.js`, `UseLogout.js`, `UseSignUp.js`: Custom hooks for authentication actions.
+- `navbar.js`: Navigation component with conditional rendering based on auth state.
 
-## Learn More
+### Server-side
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `userSchema.js`: Defines the user model and includes methods for signup and login.
+- `userController.js`: Handles user-related operations (signup, login, etc.).
+- `requireAuth.js`: Middleware to protect routes that require authentication.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## API Endpoints
 
-### Code Splitting
+- POST `/api/user/signup` - Register a new user
+- POST `/api/user/login` - Login user
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Authentication Flow
 
-### Analyzing the Bundle Size
+1. User signs up or logs in through the frontend.
+2. Server validates the request and creates/authenticates the user.
+3. Server sends a JWT token upon successful authentication.
+4. Client stores the token in localStorage and updates the AuthContext.
+5. Protected routes check the AuthContext before rendering.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
